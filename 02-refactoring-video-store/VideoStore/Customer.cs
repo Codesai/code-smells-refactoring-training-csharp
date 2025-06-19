@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using System.Globalization;
 
 namespace VideoStore;
 
 public class Customer
 {
+    private static readonly CultureInfo UsCultureInfo = new CultureInfo("en-US");
+
     public Customer(string name)
     {
         _name = name;
@@ -57,11 +60,11 @@ public class Customer
                 frequentRenterPoints++;
 
             result += "\t" + each.GetMovie().GetTitle() + "\t"
-                      + String.Format("{0:0.0}", thisAmount) + "\n";
+                      + String.Format(UsCultureInfo, "{0:0.0}", thisAmount) + "\n";
             totalAmount += thisAmount;
         }
 
-        result += "You owed " + String.Format("{0:0.0}", totalAmount) + "\n";
+        result += "You owed " + String.Format(UsCultureInfo, "{0:0.0}", totalAmount) + "\n";
         result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points\n";
 
         return result;
