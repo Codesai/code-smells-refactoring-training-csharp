@@ -2,6 +2,8 @@ namespace VideoStore;
 
 public class Rental
 {
+    private readonly Movie _movie;
+    private readonly int _daysRented;
     public Rental(Movie movie, int daysRented)
     {
         _movie = movie;
@@ -17,7 +19,4 @@ public class Rental
     {
         return _movie;
     }
-
-    private readonly Movie _movie;
-    private readonly int _daysRented;
 }

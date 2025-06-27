@@ -6,6 +6,8 @@ namespace VideoStore;
 
 public class Customer
 {
+    private readonly string _name;
+    private readonly ArrayList _rentals = new();
     private static readonly CultureInfo UsCultureInfo = new CultureInfo("en-US");
 
     public Customer(string name)
@@ -69,8 +71,4 @@ public class Customer
 
         return result;
     }
-
-
-    private readonly string _name;
-    private readonly ArrayList _rentals = new();
 }
