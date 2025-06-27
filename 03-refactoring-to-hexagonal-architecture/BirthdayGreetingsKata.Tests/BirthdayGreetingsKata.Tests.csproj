@@ -7,19 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-        <PackageReference Include="NUnit" Version="4.1.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0"/>
+        <PackageReference Include="NUnit" Version="4.1.0"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BirthdayGreetingsKata\BirthdayGreetingsKata.csproj" />
+        <ProjectReference Include="..\BirthdayGreetingsKata\BirthdayGreetingsKata.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="employee_data.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+        <None Update="employee_data.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

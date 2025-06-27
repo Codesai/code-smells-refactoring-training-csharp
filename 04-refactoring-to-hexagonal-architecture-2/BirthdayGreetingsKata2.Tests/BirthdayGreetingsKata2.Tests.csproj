@@ -11,23 +11,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-        <PackageReference Include="NSubstitute" Version="5.1.0" />
-        <PackageReference Include="NUnit" Version="4.1.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0"/>
+        <PackageReference Include="NSubstitute" Version="5.1.0"/>
+        <PackageReference Include="NUnit" Version="4.1.0"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BirthdayGreetingsKata2\BirthdayGreetingsKata2.csproj" />
+        <ProjectReference Include="..\BirthdayGreetingsKata2\BirthdayGreetingsKata2.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Infrastructure\Repositories\contains-employee-with-wrongly-formatted-birthdate.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Application\employee_data.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+        <None Update="Infrastructure\Repositories\contains-employee-with-wrongly-formatted-birthdate.csv">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Application\employee_data.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
