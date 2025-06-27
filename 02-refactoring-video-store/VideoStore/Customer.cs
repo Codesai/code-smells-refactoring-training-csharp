@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Globalization;
 
@@ -6,9 +5,9 @@ namespace VideoStore;
 
 public class Customer
 {
+    private static readonly CultureInfo UsCultureInfo = new("en-US");
     private readonly string _name;
     private readonly ArrayList _rentals = new();
-    private static readonly CultureInfo UsCultureInfo = new CultureInfo("en-US");
 
     public Customer(string name)
     {
@@ -29,13 +28,11 @@ public class Customer
     {
         double totalAmount = 0;
         var frequentRenterPoints = 0;
-        var rentals = _rentals.GetEnumerator();
         var result = "Rental Record for " + GetName() + "\n";
 
-        while (rentals.MoveNext())
+        foreach (Rental each in _rentals)
         {
             double thisAmount = 0;
-            var each = (Rental)rentals.Current;
 
             // determines the amount for each line
             switch (each.GetMovie().GetPriceCode())
@@ -62,12 +59,12 @@ public class Customer
                 frequentRenterPoints++;
 
             result += "\t" + each.GetMovie().GetTitle() + "\t"
-                      + String.Format(UsCultureInfo, "{0:0.0}", thisAmount) + "\n";
+                      + string.Format(UsCultureInfo, "{0:0.0}", thisAmount) + "\n";
             totalAmount += thisAmount;
         }
 
-        result += "You owed " + String.Format(UsCultureInfo, "{0:0.0}", totalAmount) + "\n";
-        result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points\n";
+        result += "You owed " + string.Format(UsCultureInfo, "{0:0.0}", totalAmount) + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
         return result;
     }
