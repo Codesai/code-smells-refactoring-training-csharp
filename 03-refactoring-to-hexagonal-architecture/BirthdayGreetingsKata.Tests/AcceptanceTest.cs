@@ -58,17 +58,20 @@ public class AcceptanceTest
         Assert.That(_messagesSent, Is.Empty);
     }
     
-    private static string GetAbsolutePath(string relativePath)
+    private static string GetAbsolutePath(string filePath)
     {
         var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
         while (dir != null && !dir.GetFiles("*.csproj").Any())
         {
             dir = dir.Parent;
         }
+
         if (dir == null)
         {
             throw new InvalidOperationException("project not found.");
         }
-        return Path.Combine(dir.FullName, relativePath);
+
+        return Path.Combine(new List<string> { dir.FullName }
+            .Concat(filePath.Split("/").ToList()).ToArray());
     }
 }
