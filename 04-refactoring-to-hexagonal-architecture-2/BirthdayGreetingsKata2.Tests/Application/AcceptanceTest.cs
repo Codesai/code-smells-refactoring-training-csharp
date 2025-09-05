@@ -15,7 +15,7 @@ public class AcceptanceTest
     private const string From = "sender@here.com";
     private List<MailMessage> _messagesSent;
     private BirthdayService _service;
-    private const string EmployeesFilePath = "Application/employee_data.txt";
+    private const string EmployeesFilePath = "employee_data.txt";
 
     private class BirthdayServiceForTesting : BirthdayService
     {
