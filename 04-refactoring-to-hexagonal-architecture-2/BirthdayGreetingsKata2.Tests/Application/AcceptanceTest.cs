@@ -40,7 +40,8 @@ public class AcceptanceTest
     public void SetUp()
     {
         _messagesSent = new List<MailMessage>();
-        _service = new BirthdayServiceForTesting(_messagesSent, new FileEmployeesRepository(GetAbsolutePath(EmployeesFilePath)));
+        _service = new BirthdayServiceForTesting(_messagesSent,
+            new FileEmployeesRepository(GetAbsolutePath(EmployeesFilePath)));
     }
 
     [Test]
@@ -67,7 +68,7 @@ public class AcceptanceTest
 
         Assert.That(_messagesSent, Is.Empty);
     }
-    
+
     private static string GetAbsolutePath(string filePath)
     {
         var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
@@ -75,10 +76,13 @@ public class AcceptanceTest
         {
             dir = dir.Parent;
         }
+
         if (dir == null)
         {
             throw new InvalidOperationException("project not found.");
         }
-        return Path.Combine(dir.FullName, filePath);
+
+        return Path.Combine(new List<string> { dir.FullName }
+            .Concat(filePath.Split("/").ToList()).ToArray());
     }
 }
