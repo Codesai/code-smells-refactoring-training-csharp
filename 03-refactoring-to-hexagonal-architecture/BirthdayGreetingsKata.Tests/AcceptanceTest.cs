@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Mail;
 using NUnit.Framework;
 
@@ -35,7 +38,7 @@ public class AcceptanceTest
     [Test]
     public void Base_Scenario()
     {
-        _service.SendGreetings("employee_data.txt",
+        _service.SendGreetings(GetAbsolutePath("employee_data.txt"),
             new OurDate("2008/10/08"), "localhost", SmtpPort);
 
         Assert.That(_messagesSent, Has.Exactly(1).Items);
@@ -53,5 +56,19 @@ public class AcceptanceTest
             new OurDate("2008/01/01"), "localhost", SmtpPort);
 
         Assert.That(_messagesSent, Is.Empty);
+    }
+    
+    private static string GetAbsolutePath(string relativePath)
+    {
+        var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
+        while (dir != null && !dir.GetFiles("*.csproj").Any())
+        {
+            dir = dir.Parent;
+        }
+        if (dir == null)
+        {
+            throw new InvalidOperationException("project not found.");
+        }
+        return Path.Combine(dir.FullName, relativePath);
     }
 }
