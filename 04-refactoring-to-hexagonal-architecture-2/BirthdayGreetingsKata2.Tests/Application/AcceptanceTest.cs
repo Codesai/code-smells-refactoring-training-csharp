@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Mail;
 using BirthdayGreetingsKata2.Application;
 using BirthdayGreetingsKata2.Core;
@@ -15,7 +18,7 @@ public class AcceptanceTest
     private const string From = "sender@here.com";
     private List<MailMessage> _messagesSent;
     private BirthdayService _service;
-    private const string EmployeesFilePath = "employee_data.txt";
+    private const string EmployeesFilePath = "/Application/employee_data.txt";
 
     private class BirthdayServiceForTesting : BirthdayService
     {
@@ -37,7 +40,7 @@ public class AcceptanceTest
     public void SetUp()
     {
         _messagesSent = new List<MailMessage>();
-        _service = new BirthdayServiceForTesting(_messagesSent, new FileEmployeesRepository(EmployeesFilePath));
+        _service = new BirthdayServiceForTesting(_messagesSent, new FileEmployeesRepository(GetProjectDirectory(EmployeesFilePath)));
     }
 
     [Test]
@@ -63,5 +66,19 @@ public class AcceptanceTest
         _service.SendGreetings(today, SmtpHost, SmtpPort, From);
 
         Assert.That(_messagesSent, Is.Empty);
+    }
+    
+    private static string GetProjectDirectory(string relativePath)
+    {
+        var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
+        while (dir != null && !dir.GetFiles("*.csproj").Any())
+        {
+            dir = dir.Parent;
+        }
+        if (dir == null)
+        {
+            throw new InvalidOperationException("project not found.");
+        }
+        return dir.FullName + relativePath;
     }
 }
