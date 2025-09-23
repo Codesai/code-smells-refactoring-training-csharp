@@ -24,12 +24,15 @@
     <ItemGroup>
         <None Update="Infrastructure\Repositories\contains-employee-with-wrongly-formatted-birthdate.csv">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <TargetPath>Infrastructure\Repositories\contains-employee-with-wrongly-formatted-birthdate.csv</TargetPath>
         </None>
         <None Update="Application\employee_data.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <TargetPath>Application\employee_data.txt</TargetPath>
         </None>
         <None Update="Infrastructure\Repositories\contains-not-enough-fields.csv">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <TargetPath>Infrastructure\Repositories\contains-not-enough-fields.csv</TargetPath>
         </None>
     </ItemGroup>
 
