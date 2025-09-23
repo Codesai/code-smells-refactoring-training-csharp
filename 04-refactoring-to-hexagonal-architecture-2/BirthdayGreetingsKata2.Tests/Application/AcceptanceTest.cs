@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using BirthdayGreetingsKata2.Application;
 using BirthdayGreetingsKata2.Core;
@@ -41,7 +38,7 @@ public class AcceptanceTest
     {
         _messagesSent = new List<MailMessage>();
         _service = new BirthdayServiceForTesting(_messagesSent,
-            new FileEmployeesRepository(GetAbsolutePath(EmployeesFilePath)));
+            new FileEmployeesRepository(EmployeesFilePath));
     }
 
     [Test]
@@ -67,22 +64,5 @@ public class AcceptanceTest
         _service.SendGreetings(today, SmtpHost, SmtpPort, From);
 
         Assert.That(_messagesSent, Is.Empty);
-    }
-
-    private static string GetAbsolutePath(string filePath)
-    {
-        var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-        while (dir != null && !dir.GetFiles("*.csproj").Any())
-        {
-            dir = dir.Parent;
-        }
-
-        if (dir == null)
-        {
-            throw new InvalidOperationException("project not found.");
-        }
-
-        return Path.Combine(new List<string> { dir.FullName }
-            .Concat(filePath.Split("/").ToList()).ToArray());
     }
 }
